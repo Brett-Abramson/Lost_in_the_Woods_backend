@@ -6,6 +6,7 @@ const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
+const Camping = require("../project_3_backend/models/camping")
 //___________________
 //Port
 //___________________
@@ -48,6 +49,35 @@ app.use("/camping", campingController)
 app.get('/' , (req, res) => {
   res.send('Hello World!');
 });
+//____________________________
+/// === CAMPING ===
+//_____________________________
+app.get("/camping", (req, res) => {
+  Camping.find({})
+  .then((foundCamp) => {
+      res.json(foundCamp)
+  });
+});
+// ===  Add ===
+app.post("/camping", (req,res) => {
+  Camping.create(req.body)
+  .then((createdCamp) =>
+  {
+      res.json(createdCamp);
+  });
+});
+//  === Update  ===
+app.put("/camping/:id", (req, res) => {
+  Camping.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
+    (updatedCamp) => res.json(updatedCamp)
+  );
+});
+//  === DELETE  ===
+app.delete("/camping/:id", (req,res) => {
+  Camping.findByIdAndDelete(req.params.id).then((deletedCamp) => {
+      res.json(deletedCamp)
+  })
+})
 
 //___________________
 //Listener
