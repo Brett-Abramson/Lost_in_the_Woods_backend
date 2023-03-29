@@ -33,6 +33,13 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
 app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project
 //___________________
+//=== CONTROLLERS === 
+//___________________
+const campingController = require("./controllers/camping.js")
+app.use("/camping", campingController)
+
+
+//___________________
 // Routes
 //___________________
 //localhost:3000
