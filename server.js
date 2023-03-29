@@ -6,6 +6,7 @@ const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
+const Camping = require("../project_3_backend/models/camping")
 //___________________
 //Port
 //___________________
@@ -20,7 +21,9 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Connect to Mongo &
 // Fix Depreciation Warnings from Mongoose
 // May or may not need these depending on your Mongoose version
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI).then(() =>{
+  console.log("connected to mongo")
+})
 
 //___________________
 //Middleware
@@ -33,12 +36,48 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
 app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project
 //___________________
+//=== CONTROLLERS === 
+//___________________
+const campingController = require("./controllers/camping.js")
+app.use("/camping", campingController)
+
+
+//___________________
 // Routes
 //___________________
 //localhost:3000
 app.get('/' , (req, res) => {
   res.send('Hello World!');
 });
+//____________________________
+/// === CAMPING ===
+//_____________________________
+app.get("/camping", (req, res) => {
+  Camping.find({})
+  .then((foundCamp) => {
+      res.json(foundCamp)
+  });
+});
+// ===  Add ===
+app.post("/camping", (req,res) => {
+  Camping.create(req.body)
+  .then((createdCamp) =>
+  {
+      res.json(createdCamp);
+  });
+});
+//  === Update  ===
+app.put("/camping/:id", (req, res) => {
+  Camping.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
+    (updatedCamp) => res.json(updatedCamp)
+  );
+});
+//  === DELETE  ===
+app.delete("/camping/:id", (req,res) => {
+  Camping.findByIdAndDelete(req.params.id).then((deletedCamp) => {
+      res.json(deletedCamp)
+  })
+})
 
 //___________________
 //Listener
