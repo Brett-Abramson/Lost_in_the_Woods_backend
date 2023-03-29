@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const campingSchema = new mongoose.Schema({
-    name: {type: String, required},
+    name: {type: String, require},
     location: String,
     campType: String,
     Amenities: {
