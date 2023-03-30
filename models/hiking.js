@@ -18,7 +18,8 @@ const hikingSchema = new mongoose.Schema({
         name: String,
         duration: String,
         weather: String,
-        commentSection: String
+        commentSection: String,
+        timestamps: true,
     }
 });
 
