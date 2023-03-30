@@ -12,12 +12,14 @@ const hikingSchema = new mongoose.Schema({
     mapIntigration: String,
     tags: [String],
     description: String,
+    parkingDetails: String,
     comments: {
         photo: String,
         name: String,
         duration: String,
         weather: String,
-        commentSection: String
+        commentSection: String,
+        timestamps: true,
     }
 });
 
