@@ -12,6 +12,7 @@ const hikingSchema = new mongoose.Schema({
     mapIntigration: String,
     tags: [String],
     description: String,
+    parkingDetails: String,
     comments: {
         photo: String,
         name: String,
