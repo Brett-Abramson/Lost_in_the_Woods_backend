@@ -24,6 +24,17 @@ const campingSchema = new mongoose.Schema({
     campgroundSize: String,
     easeOfBooking: String,
     storesNearby: String,
+    parking: String,
+    decription: String,
+    bookingType: String,
+    comments: {
+        photo: String,
+        name: String,
+        duration: String,
+        weather: String,
+        commentSection: String,
+        timestamps: true,
+    }
 
 
 });
