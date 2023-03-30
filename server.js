@@ -8,6 +8,7 @@ const db = mongoose.connection;
 require('dotenv').config()
 const Camping = require("../project_3_backend/models/camping")
 const Hiking = require("../project_3_backend/models/hiking")
+const cors = require("cors")
 //___________________
 //Port
 //___________________
@@ -36,6 +37,7 @@ app.use(express.static('public'));
 // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
 app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
 app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project
+app.use(cors());//allows us access from another port or domain
 //___________________
 //=== CONTROLLERS === 
 //___________________
