@@ -33,7 +33,7 @@ const campingSchema = new mongoose.Schema({
         duration: String,
         weather: String,
         commentSection: String,
-        timestamps: true,
+        // timestamps: true,
     }
 
 
