@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
 
+const commentSchema = new mongoose.Schema({
+    photo: String,
+    name: String,
+    duration: Number,
+    weather: String,
+    commentSection: String
+})
+
 const hikingSchema = new mongoose.Schema({
     name: {type: String, require},
     photo: String,
@@ -26,15 +34,7 @@ const hikingSchema = new mongoose.Schema({
     }],
     description: String,
     parkingDetails: String,
-    comments: [{
-        photo: String,
-        name: String,
-        duration: String,
-        weather: String,
-        commentSection: String,
-        date: String
-        // timestamps: true,
-    }]
+    comment: [commentSchema]
 });
 
 const Hiking = mongoose.model('Hiking', hikingSchema);
