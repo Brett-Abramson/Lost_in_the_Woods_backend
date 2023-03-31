@@ -23,9 +23,6 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Connect to Mongo &
 // Fix Depreciation Warnings from Mongoose
 // May or may not need these depending on your Mongoose version
-mongoose.connect(MONGODB_URI).then(() =>{
-  console.log("connected to mongo")
-})
 
 //___________________
 //Middleware
@@ -44,14 +41,52 @@ app.use(cors());//allows us access from another port or domain
 const campingController = require("./controllers/camping.js")
 app.use("/camping", campingController)
 
+////////
+//pag attepmt
+/////////
 
 //___________________
 // Routes
 //___________________
 //localhost:3000
-app.get('/' , (req, res) => {
-  res.send('Hello World!');
+
+app.get('/' , paginatedResults(users), (req, res) => {
+  res.json(res.paginatedResults)
 });
+
+
+function paginatedResults(model) {
+  return (req, res, next) => {
+    const page = parseInt(req.query.page)
+    const limit = parseInt(req.query.limit)
+    
+    const startIndex = (page - 1) * limit
+    const endIndex = page * limit
+  
+    const results = {}
+
+    if (endIndex < model.legnth){
+    results.next = {
+        page: page +1,
+        limit: limit
+    }
+  }
+  
+    if (startIndex > 0){
+    results.previous = {
+      page: page -1,
+      limit: limit
+    }
+  }
+    
+    results.results = model.slice(startIndex, endIndex)
+
+    res.paginatedResults = results
+    next()
+  }
+}
+
+
 //____________________________
 /// === CAMPING ===
 //_____________________________
@@ -119,3 +154,7 @@ app.delete("/hiking/:id", (req,res) => {
 //Listener
 //___________________
 app.listen(PORT, () => console.log( 'Listening on port:', PORT));
+
+mongoose.connect(MONGODB_URI).then(() =>{
+  console.log("connected to mongo")
+})
