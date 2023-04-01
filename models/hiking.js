@@ -1,8 +1,16 @@
 const mongoose = require('mongoose');
 
-const hikingSchema = new mongoose.Schema({
+const commentSchema = new mongoose.Schema({
     photo: String,
     name: String,
+    duration: Number,
+    weather: String,
+    commentSection: String
+})
+
+const hikingSchema = new mongoose.Schema({
+    name: {type: String, require},
+    photo: String,
     distance: Number,
     duration: Number,
     location: String,
@@ -10,7 +18,7 @@ const hikingSchema = new mongoose.Schema({
     elevationGain: Number,
     routeType: String,
     mapIntigration: String,
-    tags: {
+    tags: [{
         quick: Boolean,
         easy: Boolean,
         challenging: Boolean,
@@ -23,17 +31,10 @@ const hikingSchema = new mongoose.Schema({
         bathrooms: Boolean,
         water: Boolean,
         freePraking: Boolean,
-    },
+    }],
     description: String,
     parkingDetails: String,
-    comments: {
-        photo: String,
-        name: String,
-        duration: String,
-        weather: String,
-        commentSection: String,
-        timestamps: true,
-    }
+    comment: [commentSchema]
 });
 
 const Hiking = mongoose.model('Hiking', hikingSchema);
