@@ -4,7 +4,7 @@ const campingSchema = new mongoose.Schema({
     name: {type: String, require},
     location: String,
     campType: String,
-    Amenities: {
+    Amenities: [{
         water: Boolean,
         electric: Boolean,
         pool: Boolean,
@@ -19,11 +19,23 @@ const campingSchema = new mongoose.Schema({
         shower: Boolean,
         grill: Boolean,
         fireRing: Boolean
-    },
+    }],
     campsiteSize: String,
     campgroundSize: String,
     easeOfBooking: String,
     storesNearby: String,
+    parking: String,
+    decription: String,
+    bookingType: String,
+    comments: [{
+        photo: String,
+        name: String,
+        duration: String,
+        weather: String,
+        commentSection: String,
+        date: String
+        // timestamps: true,
+    }]
 
 
 });
