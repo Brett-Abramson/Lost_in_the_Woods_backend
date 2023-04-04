@@ -41,8 +41,8 @@ app.use(cors());//allows us access from another port or domain
 //___________________
 //=== CONTROLLERS === 
 //___________________
-const campingController = require("./controllers/camping.js")
-app.use("/camping", campingController)
+// const campingController = require("./controllers/camping.js")
+// app.use("/camping", campingController)
 
 
 //___________________
