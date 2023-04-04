@@ -4,6 +4,7 @@ const campingSchema = new mongoose.Schema({
     name: {type: String, require},
     location: String,
     campType: String,
+    photo: String,
     Amenities: [{
         water: Boolean,
         electric: Boolean,
