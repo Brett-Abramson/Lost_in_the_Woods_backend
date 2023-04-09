@@ -17,7 +17,7 @@ const hikingSchema = new mongoose.Schema({
     difficulty: String,
     elevationGain: Number,
     routeType: String,
-    mapIntigration: String,
+    mapIntegration: String,
     tags: [{
         quick: Boolean,
         easy: Boolean,

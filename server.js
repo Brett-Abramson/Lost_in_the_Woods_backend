@@ -6,8 +6,8 @@ const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
-const Camping = require("../project_3_backend/models/camping")
-const Hiking = require("../project_3_backend/models/hiking")
+const Camping = require("./models/camping")
+const Hiking = require("./models/hiking")
 const cors = require("cors")
 //___________________
 //Port
